@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True"
+             x:Class="UniApp.Mobile.Views.HomePage"
+             BackgroundColor="{StaticResource FundoClaro}">
+    <Grid RowDefinitions="Auto, *">
+        <Border Grid.Row="0" BackgroundColor="{StaticResource VerdePrimario}" Padding="20,36,20,24"
+                StrokeThickness="0" StrokeShape="RoundRectangle 0,0,24,24">
+            <VerticalStackLayout Spacing="12">
+                <Label Text="UniApp" TextColor="White" FontSize="22" FontAttributes="Bold" />
+                <Label Text="Olá, estudante!" TextColor="#D0E3DA" FontSize="14" />
+                <Border BackgroundColor="White" StrokeShape="RoundRectangle 14" Padding="12,2">
+                    <SearchBar Placeholder="Buscar livros, calculadoras, materiais..."
+                               Text="{Binding TextoBusca}"
+                               SearchCommand="{Binding CarregarMateriaisCommand}" />
+                </Border>
+            </VerticalStackLayout>
+        </Border>
+
+        <ScrollView Grid.Row="1" Padding="16">
+            <VerticalStackLayout Spacing="16">
+                <CollectionView ItemsSource="{Binding Categorias}" HeightRequest="42" SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Button Text="{Binding .}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.FiltrarCategoriaCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="White"
+                                    TextColor="{StaticResource VerdePrimario}"
+                                    BorderColor="#DCE3DF"
+                                    BorderWidth="1"
+                                    CornerRadius="20"
+                                    Padding="16,0" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Label Text="Materiais em destaque" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource TextoEscuro}" />
+
+                <CollectionView ItemsSource="{Binding Materiais}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="12" VerticalItemSpacing="12" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BackgroundColor="White" Stroke="#E5ECE8" StrokeShape="RoundRectangle 16" Padding="12">
+                                <VerticalStackLayout Spacing="6">
+                                    <Border BackgroundColor="{Binding BadgeCor}" HorizontalOptions="Start" Padding="8,2" StrokeShape="RoundRectangle 6" StrokeThickness="0">
+                                        <Label Text="{Binding BadgeTexto}" FontSize="10" FontAttributes="Bold" TextColor="{StaticResource VerdePrimario}" />
+                                    </Border>
+                                    <Label Text="{Binding CursoRelacionado}" FontSize="10" FontAttributes="Bold" TextColor="{StaticResource VerdePrimario}" />
+                                    <Label Text="{Binding Titulo}" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource TextoEscuro}" MaxLines="1" />
+                                    <Label Text="{Binding EstadoConservacao}" FontSize="12" TextColor="{StaticResource TextoSuave}" />
+                                    <Label Text="{Binding PrecoFormatado}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextoEscuro}" />
+                                    <Label Text="{Binding Usuario.Nome}" FontSize="11" TextColor="{StaticResource TextoSuave}" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

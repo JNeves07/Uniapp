@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:UniApp.Mobile.Views"
+       x:Class="UniApp.Mobile.AppShell"
+       Shell.NavBarIsVisible="False">
+
+    <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate views:LoginPage}" />
+
+    <TabBar Route="MainTabs">
+        <ShellContent Title="Início" Route="HomePage" ContentTemplate="{DataTemplate views:HomePage}" />
+        <ShellContent Title="Anunciar" Route="AnunciarPage" ContentTemplate="{DataTemplate views:AnunciarPage}" />
+        <ShellContent Title="Grupos" Route="GruposPage" ContentTemplate="{DataTemplate views:GruposPage}" />
+        <ShellContent Title="Perfil" Route="PerfilPage" ContentTemplate="{DataTemplate views:PerfilPage}" />
+    </TabBar>
+</Shell>

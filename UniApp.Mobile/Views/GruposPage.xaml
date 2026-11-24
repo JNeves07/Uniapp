@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True"
+             x:Class="UniApp.Mobile.Views.GruposPage"
+             BackgroundColor="{StaticResource FundoClaro}">
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="16">
+            <Label Text="CRESCER EM CONJUNTO" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource VerdePrimario}" Margin="0,16,0,0" />
+            <Label Text="Apoio Acadêmico" FontSize="26" FontAttributes="Bold" TextColor="{StaticResource TextoEscuro}" />
+            <Label Text="Aprender juntos fica mais fácil." TextColor="{StaticResource TextoSuave}" />
+
+            <SearchBar Placeholder="Buscar disciplina ou grupo de estudo"
+                       Text="{Binding BuscaDisciplina}"
+                       SearchCommand="{Binding CarregarGruposCommand}"
+                       BackgroundColor="White" />
+
+            <CollectionView ItemsSource="{Binding Formatos}" HeightRequest="40" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Text="{Binding .}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.FiltrarFormatoCommand}"
+                                CommandParameter="{Binding .}"
+                                BackgroundColor="White"
+                                TextColor="{StaticResource VerdePrimario}"
+                                BorderColor="#DCE3DF"
+                                BorderWidth="1"
+                                CornerRadius="18"
+                                Padding="16,0" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Grupos recomendados" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource TextoEscuro}" />
+
+            <CollectionView ItemsSource="{Binding Grupos}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="White" Stroke="#E5ECE8" StrokeShape="RoundRectangle 16" Padding="16" Margin="0,0,0,12">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="RECOMENDADO" IsVisible="{Binding Recomendado}" FontSize="10" FontAttributes="Bold" TextColor="#D98A00" />
+                                <Label Text="{Binding Nome}" FontSize="17" FontAttributes="Bold" TextColor="{StaticResource TextoEscuro}" />
+                                <Label Text="{Binding Disciplina}" FontSize="13" TextColor="{StaticResource TextoSuave}" />
+                                <HorizontalStackLayout Spacing="16">
+                                    <Label Text="{Binding Horario, StringFormat='Horário: {0}'}" FontSize="12" TextColor="{StaticResource TextoSuave}" />
+                                    <Label Text="{Binding Formato, StringFormat='Formato: {0}'}" FontSize="12" TextColor="{StaticResource VerdePrimario}" FontAttributes="Bold" />
+                                </HorizontalStackLayout>
+                                <Grid ColumnDefinitions="*, Auto" Margin="0,6,0,0">
+                                    <Label Text="{Binding VagasTexto}" VerticalOptions="Center" FontSize="12" TextColor="{StaticResource TextoSuave}" />
+                                    <Button Grid.Column="1" Text="Participar"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ParticiparGrupoCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="{StaticResource FundoClaro}"
+                                            TextColor="{StaticResource VerdePrimario}"
+                                            BorderColor="#DCE3DF"
+                                            BorderWidth="1"
+                                            CornerRadius="10"
+                                            HeightRequest="36" />
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

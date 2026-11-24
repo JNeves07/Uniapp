@@ -1,0 +1,18 @@
+## Ignore Visual Studio / .NET temporary files
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.cache
+*.dll
+*.exe
+*.pdb
+*.log
+*.tlog
+TestResults/
+AppPackages/
+BundleArtifacts/
+.DS_Store
+Thumbs.db

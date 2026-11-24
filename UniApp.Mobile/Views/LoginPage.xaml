@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True"
+             x:Class="UniApp.Mobile.Views.LoginPage"
+             BackgroundColor="{StaticResource FundoClaro}">
+    <ScrollView>
+        <VerticalStackLayout Spacing="0">
+            <Border BackgroundColor="{StaticResource VerdePrimario}"
+                    StrokeThickness="0"
+                    Padding="24,48,24,36"
+                    StrokeShape="RoundRectangle 0,0,28,28">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="UniApp" TextColor="White" FontSize="24" FontAttributes="Bold" />
+                    <Border BackgroundColor="{StaticResource VerdeMenta}" HeightRequest="84" WidthRequest="84"
+                            HorizontalOptions="Center" StrokeShape="RoundRectangle 20" StrokeThickness="0">
+                        <Label Text="UA" FontSize="32" FontAttributes="Bold" TextColor="{StaticResource VerdePrimario}"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+
+            <VerticalStackLayout Padding="24" Spacing="16">
+                <Label Text="COMUNIDADE UNIVERSITÁRIA" TextColor="{StaticResource VerdePrimario}"
+                       FontSize="12" FontAttributes="Bold" CharacterSpacing="1" />
+                <Label Text="Conecte-se. Compartilhe. Evolua." TextColor="{StaticResource TextoEscuro}"
+                       FontSize="28" FontAttributes="Bold" LineHeight="1.1" />
+                <Label Text="Sua comunidade universitária em um só lugar." TextColor="{StaticResource TextoSuave}" FontSize="15" />
+
+                <Label Text="E-mail institucional" FontAttributes="Bold" TextColor="{StaticResource TextoEscuro}" Margin="0,8,0,0" />
+                <Border BackgroundColor="White" Stroke="#E0E6E3" StrokeShape="RoundRectangle 12" Padding="12,4">
+                    <Entry Text="{Binding Email}" Placeholder="nome@suauniversidade.edu.br" Keyboard="Email" />
+                </Border>
+
+                <Label Text="Senha" FontAttributes="Bold" TextColor="{StaticResource TextoEscuro}" />
+                <Border BackgroundColor="White" Stroke="#E0E6E3" StrokeShape="RoundRectangle 12" Padding="12,4">
+                    <Entry Text="{Binding Senha}" Placeholder="Digite sua senha" IsPassword="True" />
+                </Border>
+
+                <Button Text="Entrar"
+                        Command="{Binding EntrarCommand}"
+                        BackgroundColor="{StaticResource VerdePrimario}"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        HeightRequest="52"
+                        CornerRadius="14"
+                        Margin="0,12,0,0" />
+
+                <Label Text="Ambiente exclusivo para a comunidade universitária"
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource TextoSuave}"
+                       FontSize="12"
+                       Margin="0,12,0,0" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

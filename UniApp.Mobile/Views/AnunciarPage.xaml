@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True"
+             x:Class="UniApp.Mobile.Views.AnunciarPage"
+             BackgroundColor="{StaticResource FundoClaro}">
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="14">
+            <Label Text="Anunciar Material" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource VerdePrimario}" Margin="0,16,0,4" />
+            <Label Text="Coloque itens acadêmicos em circulação na sua universidade." TextColor="{StaticResource TextoSuave}" />
+
+            <Label Text="Título do item" FontAttributes="Bold" />
+            <Entry Text="{Binding Titulo}" Placeholder="Ex: Livro Cálculo I - James Stewart" BackgroundColor="White" />
+
+            <Label Text="Categoria" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding Categorias}" SelectedItem="{Binding Categoria}" BackgroundColor="White" />
+
+            <Label Text="Curso / Disciplina" FontAttributes="Bold" />
+            <Entry Text="{Binding Curso}" Placeholder="Ex: ADS, Engenharias..." BackgroundColor="White" />
+
+            <Label Text="Estado de conservação" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding Estados}" SelectedItem="{Binding Estado}" BackgroundColor="White" />
+
+            <Label Text="Modalidade" FontAttributes="Bold" />
+            <Picker ItemsSource="{Binding Modalidades}" SelectedItem="{Binding Modalidade}" BackgroundColor="White" />
+
+            <Label Text="Valor (R$) - deixe 0 para Doação" FontAttributes="Bold" />
+            <Entry Text="{Binding PrecoTexto}" Keyboard="Numeric" BackgroundColor="White" />
+
+            <Label Text="Descrição" FontAttributes="Bold" />
+            <Editor Text="{Binding Descricao}" HeightRequest="90" Placeholder="Detalhes sobre edição, estado, local de entrega..." BackgroundColor="White" />
+
+            <Button Text="Publicar Anúncio"
+                    Command="{Binding PublicarCommand}"
+                    BackgroundColor="{StaticResource VerdePrimario}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    HeightRequest="50"
+                    CornerRadius="12"
+                    Margin="0,10,0,20" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
