@@ -1,4 +1,4 @@
-# UniApp - Economia Circular e Apoio Acadêmico
+# UniApp-StudyHub - Economia Circular e Apoio Acadêmico
 
 Plataforma mobile multiplataforma (**Android, iOS e Windows**) e API REST desenvolvida para conectar estudantes universitários, promovendo a economia circular por meio da compra, venda, troca e doação de materiais acadêmicos, além da organização de grupos de estudo colaborativos.
 
