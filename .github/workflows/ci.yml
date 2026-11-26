@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  backend:
+    name: Backend (.NET 8) - restore, build e testes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore UniApp.Backend/UniApp.Api.csproj && dotnet restore tests/UniApp.Backend.Tests/UniApp.Backend.Tests.csproj
+
+      - name: Build
+        run: dotnet build UniApp.Backend/UniApp.Api.csproj --no-restore -c Release && dotnet build tests/UniApp.Backend.Tests/UniApp.Backend.Tests.csproj --no-restore -c Release
+
+      - name: Test
+        run: dotnet test tests/UniApp.Backend.Tests/UniApp.Backend.Tests.csproj --no-build --no-restore -c Release --logger "trx;LogFileName=uniapp-backend.trx" --results-directory TestResults
+
+      - name: Publicar relatorio de testes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults/
+          if-no-files-found: ignore
+
+  mobile-optional:
+    name: Mobile (MAUI) - job opcional (nao bloqueia)
+    # MAUI exige workload pesado; so executa manualmente e nunca bloqueia o CI.
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: windows-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10 (MAUI)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Instalar workload maui-windows
+        run: dotnet workload install maui-windows
+
+      - name: Build do alvo Windows
+        run: dotnet build UniApp.Mobile/UniApp.Mobile.csproj -c Release -f net10.0-windows10.0.19041.0

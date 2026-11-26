@@ -16,3 +16,15 @@ AppPackages/
 BundleArtifacts/
 .DS_Store
 Thumbs.db
+
+## Segredos e arquivos locais
+.env
+.env.*
+!.env.example
+*.db
+*.db-shm
+*.db-wal
+*.pfx
+*.key
+UniApp.Mobile/Properties/launchSettings.json
+

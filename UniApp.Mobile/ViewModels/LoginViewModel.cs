@@ -20,7 +20,7 @@ public partial class LoginViewModel : ObservableObject
     {
         if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Senha))
         {
-            await Shell.Current.DisplayAlert("Atenção", "Preencha seu e-mail institucional e senha.", "OK");
+            await Shell.Current.DisplayAlertAsync("Atenção", "Preencha seu e-mail institucional e senha.", "OK");
             return;
         }
 
@@ -29,8 +29,19 @@ public partial class LoginViewModel : ObservableObject
         Carregando = false;
 
         if (ok)
+        {
+            if (_api.ModoDemo)
+                await Shell.Current.DisplayAlertAsync("Modo demonstração",
+                    "A API não está disponível. Os dados exibidos são de exemplo.", "OK");
+
             await Shell.Current.GoToAsync("//HomePage");
+        }
         else
-            await Shell.Current.DisplayAlert("Erro", "Credenciais inválidas.", "OK");
+        {
+            var mensagem = string.IsNullOrWhiteSpace(_api.UltimoErro)
+                ? "Credenciais inválidas."
+                : _api.UltimoErro;
+            await Shell.Current.DisplayAlertAsync("Erro", mensagem, "OK");
+        }
     }
 }

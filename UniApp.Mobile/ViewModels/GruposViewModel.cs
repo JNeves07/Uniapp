@@ -40,12 +40,15 @@ public partial class GruposViewModel : ObservableObject
         var ok = await _api.ParticiparGrupoAsync(grupo.Id);
         if (ok)
         {
-            await Shell.Current.DisplayAlert("Inscrição Confirmada", $"Você entrou no grupo '{grupo.Nome}' ({grupo.Horario}).", "OK");
+            await Shell.Current.DisplayAlertAsync("Inscrição Confirmada", $"Você entrou no grupo '{grupo.Nome}' ({grupo.Horario}).", "OK");
             await CarregarGruposAsync();
         }
         else
         {
-            await Shell.Current.DisplayAlert("Aviso", "Não há vagas disponíveis neste grupo.", "OK");
+            var mensagem = string.IsNullOrWhiteSpace(_api.UltimoErro)
+                ? "Não há vagas disponíveis neste grupo."
+                : _api.UltimoErro;
+            await Shell.Current.DisplayAlertAsync("Aviso", mensagem, "OK");
         }
     }
 }

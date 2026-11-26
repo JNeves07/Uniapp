@@ -1,5 +1,14 @@
 namespace UniApp.Mobile.Models;
 
+/// <summary>Resposta de login/registro/refresh da API.</summary>
+public class AuthResponse
+{
+    public string Token { get; set; } = string.Empty;
+    public string RefreshToken { get; set; } = string.Empty;
+    public int ExpiresIn { get; set; }
+    public UsuarioDto Usuario { get; set; } = new();
+}
+
 public class UsuarioDto
 {
     public int Id { get; set; }

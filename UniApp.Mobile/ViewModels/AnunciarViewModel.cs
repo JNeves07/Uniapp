@@ -28,7 +28,7 @@ public partial class AnunciarViewModel : ObservableObject
     {
         if (string.IsNullOrWhiteSpace(Titulo))
         {
-            await Shell.Current.DisplayAlert("Aviso", "Informe o título do material.", "OK");
+            await Shell.Current.DisplayAlertAsync("Aviso", "Informe o título do material.", "OK");
             return;
         }
 
@@ -47,10 +47,17 @@ public partial class AnunciarViewModel : ObservableObject
 
         if (sucesso)
         {
-            await Shell.Current.DisplayAlert("Sucesso", "Material publicado na rede universitária!", "OK");
+            await Shell.Current.DisplayAlertAsync("Sucesso", "Material publicado na rede universitária!", "OK");
             Titulo = Descricao = string.Empty;
             PrecoTexto = "0,00";
             await Shell.Current.GoToAsync("//HomePage");
+        }
+        else
+        {
+            var mensagem = string.IsNullOrWhiteSpace(_api.UltimoErro)
+                ? "Não foi possível publicar o material. Tente novamente."
+                : _api.UltimoErro;
+            await Shell.Current.DisplayAlertAsync("Erro", mensagem, "OK");
         }
     }
 }
